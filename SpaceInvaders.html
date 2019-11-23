@@ -6,137 +6,35 @@
     <title>project01</title>
     <script src="js/class01.js"></script>
     <script src="js/functions.js"></script>
+    <style>
+        canvas {
+            border: solid 1px black;
+        }
+
+        #button_div {
+            float: left;
+            height: 30px;
+            width: 100%;
+        }
+
+        button {
+            margin-left: 640px;
+        }
+    </style>
 </head>
 
 <body>
-    <button onclick="set_game()">START</button>
-    <canvas width="1200" height="700" id="can">
+    <div id="button_div">
+        <button onclick="set_game()">START</button>
+        Score: <progress value="0" max="100"></progress>
+    </div>
+    <canvas width="1300" height="700" id="can">
         <div display='block'>
             <img src="alien.png" id="alien01" />
             <img src="tank.png" id="tank" />
             <img src="bullet.png" id="bulet" />
         </div>
     </canvas>
-    <!-- <script>
-        var x = 500, y = 0;
-        var canvas = document.getElementById("can");
-        var context = canvas.getContext('2d');
-        var alien01 = new Image();
-        alien01.onload = function () {
-            context.drawImage(alien01, x, y, 150, 108);
-        };
-        alien01.src = "./alien.png";
-        alien01.id = "alien01"
-        document.onkeydown = function (e) {
-            pos = 1;
-            key = window.event ? e.keyCode : e.which;
-        }
-        document.onkeyup = function (e) { pos = 0; }
-        setInterval(function () {
-            if (x >= 0 && x <= 1000 && y >= 0 && y <= 600) {
-                if (pos == 0) return;
-                if (key == 37) x -= 2;
-                if (key == 38) y -= 2;
-                if (key == 39) x += 2;
-                if (key == 40) y += 2;
-                canvas.width = canvas.width;
-                context.drawImage(alien01, x, y, 150, 108);
-            }
-        }, 5);
-    </script> -->
-    <script>
-        var bg_color = 'aliceblue';
-        var canvas = document.getElementById('can');
-        canvas.style = "background-color: " + bg_color;
-        var context = canvas.getContext('2d');
-        var tank = set_tank(context)
-        var bullets = new Array();
-        var aliens = new Array();
-        var key, pos = 0
-
-        if (canvas.getContext) {
-            // get images
-            var alienIMG = document.getElementById('alien01');
-            var buletIMG = document.getElementById('bulet');
-            var tankIMG = document.getElementById('tank')
-            // aliens.push(throw_alien(alienIMG))
-        }
-
-        document.onkeydown = function (e) {
-            pos = 1;
-            key = window.event ? e.keyCode : e.which;
-            checkKey();
-        }
-        document.onkeyup = function (e) { pos = 0; }
-
-        // alien
-        setInterval(function () {
-            if (aliens.length < 3) {
-                aliens.push(throw_alien(alienIMG))
-            }
-        }, 500);
-
-        setInterval(function () {
-            for (var i = 0; i < aliens.length; i++) {
-                al01 = aliens[i];
-                if (al01.y + 50 < tank.y) {
-                    al01.y += 2;
-                    context.fillStyle = bg_color;
-                    context.fillRect(al01.x, al01.y, 100, 100);
-                    context.drawImage(alien01, al01.x, al01.y, 100, 100);
-                }
-                else {
-                    tank.kill()
-                }
-
-                for (var j = 0; j < bullets.length; j++) {
-                    bullet = bullets[j]
-                    if (bullet.x + 20 >= al01.x && bullet.x < al01.x + 150 && bullet.y <= al01.y + 108) {
-                        al01.kill();
-                        context.fillStyle = bg_color;
-                        context.fillRect(al01.x, al01.y, 100, 100);
-                        aliens.splice(i, 1);
-                        bullet.kill();
-                        context.fillStyle = bg_color;
-                        context.fillRect(bullet.x, bullet.y, 20, 40);
-                        bullets.splice(j, 1);
-                    }
-                }
-            }
-        }, 20);
-
-        // tank
-        setInterval(function () {
-            if (tank.x >= 0 && tank.x <= 1200) {
-                // console.log('move the tank')
-                if (pos == 0) return;
-                if (key == 37) tank.x -= 2;
-                if (key == 39) tank.x += 2;
-                context.fillStyle = bg_color;
-                context.fillRect(tank.x, tank.y, 100, 100);
-                context.drawImage(tankIMG, tank.x, tank.y, 100, 100);
-            }
-        }, 5);
-
-        // bullet
-        function checkKey() {
-            if (key == 32 && tank.alive) {
-                console.log('fire the bullet')
-                bullets.push(fire_in_the_hole(tank))
-                // console.log(bullets)
-            }
-        }
-
-        var interv_id = setInterval(function () {
-            if (!tank.alive) {
-                alert('game over!')
-                console.log(interv_id)
-                for (var i = interv_id; i >= 0; i--) {
-                    clearInterval(i)
-                }
-            }
-        }, 5);
-    </script>
 </body>
 
 </html>
