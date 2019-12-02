@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>project01</title>
+    <script src="js/class01.js"></script>
+    <script src="js/functions.js"></script>
+    <style>
+        canvas {
+            border: solid 1px black;
+        }
+
+        #button_div {
+            float: left;
+            height: 30px;
+            width: 100%;
+        }
+
+        button {
+            margin-left: 640px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="button_div">
+        <button onclick="set_game()">START</button>
+        Score: <progress value="0" max="100"></progress>
+    </div>
+    <canvas width="1300" height="700" id="can">
+        <div display='block'>
+            <img src="alien.png" id="alien01" />
+            <img src="tank.png" id="tank" />
+            <img src="bullet.png" id="bulet" />
+        </div>
+    </canvas>
+</body>
+
+</html>
