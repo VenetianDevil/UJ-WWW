@@ -1,4 +1,4 @@
-# MyCosmetics
+# Squash
 
 ## Introduction
 Jakoś tam działający "squash" w *canvas* na zajęcia z technik WWW.
