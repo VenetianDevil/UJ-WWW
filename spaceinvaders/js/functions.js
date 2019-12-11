@@ -1,5 +1,5 @@
-function set_tank(ctx) {
-    var tank = new Tank(600, 600)
+function set_tank(ctx, w, h) {
+    var tank = new Tank(w / 2, h - 100)
     if (ctx) {
         var tankIMG = document.getElementById('tank')
         console.log('load the tank');
@@ -52,9 +52,10 @@ function set_game() {
     var bg_color = 'aliceblue';
     var canvas = document.getElementById('can');
     canvas.width = canvas.width;
+    canvas.height = canvas.height;
     canvas.style = "background-color: " + bg_color;
     var context = canvas.getContext('2d');
-    var tank = set_tank(context)
+    var tank = set_tank(context, canvas.width, canvas.height)
     var bullets = new Array();
     var aliens = new Array();
     var score = document.getElementsByTagName('progress')[0];
@@ -79,9 +80,9 @@ function set_alien_bullet(aliens, tank, bullets, context) {
     var alienIMG = document.getElementById('alien01');
     setInterval(function () {
         if (aliens.length < 3) {
-            aliens.push(throw_alien(alienIMG, context))
+            aliens.push(throw_alien(alienIMG, context));
         }
-    }, 500);
+    }, 1000);
 
     var score = document.getElementsByTagName('progress')[0];
     console.log(score.value)
@@ -123,13 +124,17 @@ function set_keys_handler(tank, bullets, context) {
     }
     document.onkeyup = function (e) { pos = 0; }
     setInterval(function () {
-        if (key == 32 && tank.alive) {
+        if (key == 32 && tank.alive && (bullets.length == 0 || bullets[bullets.length-1].y < tank.y - 80)) {
             console.log('fire the bullet')
             bullets.push(fire_in_the_hole(tank, context))
             // console.log(bullets)
             key = 0;
         }
-        else if (tank.x >= 0 && tank.x <= 1200) {
+        else console.log(bullets[bullets.length-1].y)
+    },0)
+
+    setInterval(function () {
+        if (tank.alive && key != 32) {
             // console.log('move the tank')
             if (pos == 0) return;
             if (key == 37) tank.x -= 2;

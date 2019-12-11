@@ -17,4 +17,4 @@
 Pobrać katalog *SpaceInvaders* i otworzyć plik: ***SpaceInvaders.html*** w przeglądarce.
 
 ## Version
-1.0
+1.1
